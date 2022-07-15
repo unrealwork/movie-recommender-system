@@ -1,20 +1,13 @@
 package io.datajek.spring.basics.movierecommendersystem;
 
-import org.assertj.core.api.Assertions;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.collection.IsArray;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsArray.*;
 import static org.hamcrest.collection.IsArrayWithSize.emptyArray;
-import static org.hamcrest.collection.IsEmptyIterable.emptyIterable;
 
 @SpringBootTest
 class FilterTest {
