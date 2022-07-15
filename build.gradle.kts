@@ -24,6 +24,7 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.jacocoTestReport {
@@ -50,6 +51,7 @@ sonarqube {
 
 java {
     version = 17
+    
 }
 
 group = "io.datajek.spring.basics"
