@@ -5,9 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class MovieRecommenderSystemApplication {
+    public MovieRecommenderSystemApplication() {
+        throw new UnsupportedOperationException();
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(MovieRecommenderSystemApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MovieRecommenderSystemApplication.class, args);
+    }
 
 }
