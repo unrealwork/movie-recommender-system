@@ -34,12 +34,16 @@ tasks.jacocoTestReport {
         xml.outputLocation
             .set(File("$buildDir/reports/jacoco/test/jacoco.xml"))
     }
+}
 
-    classDirectories.setFrom(
-        sourceSets.main.get().output.asFileTree.matching {
-            exclude("**/MovieRecommenderSystemApplication*")
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = "0.8".toBigDecimal()
+            }
         }
-    )
+    }
 }
 
 tasks.test {
@@ -52,6 +56,7 @@ sonarqube {
         property("sonar.projectKey", "unrealwork_movie-recommender-system")
         property("sonar.organization", "unrealwork-github")
         property("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/test/jacoco.xml")
+        property("sonar.coverage.exclusions", "**/MovieRecommenderSystemApplication*")
     }
 }
 
