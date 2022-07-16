@@ -1,33 +1,37 @@
 package io.datajek.spring.basics.movierecommendersystem;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import java.util.Arrays;
-
 @SuppressWarnings("HideUtilityClassConstructor")
 @SpringBootApplication
+@Slf4j
 public class MovieRecommenderSystemApplication {
-    private static final Logger LOG = LoggerFactory.getLogger(MovieRecommenderSystemApplication.class);
+
 
     public static void main(String[] args) {
+
         //ApplicationContext manages the beans and dependencies
-        ApplicationContext appContext = SpringApplication.run(
-                MovieRecommenderSystemApplication.class, args);
+        ApplicationContext appContext = SpringApplication.run(MovieRecommenderSystemApplication.class, args);
 
-        //create object of RecommenderImplementation class
-        RecommenderImplementation recommender = appContext.getBean(RecommenderImplementation.class);
+        //Retrieve and print singleton bean from application context
+        ContentBasedFilter filter = appContext.getBean(ContentBasedFilter.class);
+        log.info("\nContentBasedFilter bean with singleton scope");
+        log.info("{}", filter);
 
-        //call method to get recommendations
-        String[] result = recommender.recommendMovies("Finding Dory");
+        //Retrieve and print prototype bean from the singleton bean twice
+        Movie movie1 = filter.getMovie();
+        Movie movie2 = filter.getMovie();
+        Movie movie3 = filter.getMovie();
 
-        //display results
-        if (LOG.isInfoEnabled()) {
-            LOG.info("{}", Arrays.toString(result));
-        }
+        log.info("Movie bean with prototype scope");
+        log.info("{} {} {}", movie1, movie2, movie3);
+
+        //Print number of instances of each bean
+        log.info("\nContentBasedFilter instances created: " + ContentBasedFilter.getInstances());
+        log.info("Movie instances created: " + Movie.getInstances());
     }
 
 }
